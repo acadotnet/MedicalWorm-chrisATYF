@@ -7,7 +7,7 @@ namespace MedicalWorm.Core.Models
 {
     public class Doctor : EmployeeBase, IEmployee
     {
-        //TODO: Add constant for pay rate used in CalculatePay()
+        private const int _payRate = 180;
 
         public MedicalSpeciality Speciality { get; set; }
         public MedicalLicense LicenseObtained { get; set; }
@@ -26,7 +26,7 @@ namespace MedicalWorm.Core.Models
 
         public decimal CalculatePay()
         {
-            return HoursWorked * 180;
+            return HoursWorked * _payRate;
         }
 
         public override void TakeVacation(int numberOfDays)
