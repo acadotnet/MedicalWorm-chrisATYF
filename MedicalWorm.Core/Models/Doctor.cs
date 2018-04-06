@@ -7,7 +7,7 @@ namespace MedicalWorm.Core.Models
 {
     public class Doctor : EmployeeBase, IEmployee
     {
-        private const int _payRate = 180;
+        private const int _payRate = 180; 
 
         public MedicalSpeciality Speciality { get; set; }
         public MedicalLicense LicenseObtained { get; set; }
