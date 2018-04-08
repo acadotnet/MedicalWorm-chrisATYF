@@ -54,6 +54,17 @@ namespace MedicalWorm
                     LicenseObtained = MedicalLicense.DoctorofMedicine,
                     PrescriptionAuthorizationId = Guid.NewGuid(),
                     Nurses = new List<Nurse>()
+                },
+                new Doctor
+                {
+                    EmployeeId = 8335,
+                    Name = "Chris McDonald",
+                    HoursWorked = 30.25M,
+                    VacationDays = 13,
+                    Speciality = MedicalSpeciality.Anesthesiology,
+                    LicenseObtained = MedicalLicense.DoctorofMedicine,
+                    PrescriptionAuthorizationId = Guid.NewGuid(),
+                    Nurses = new List<Nurse>()
                 }
             };
         }
@@ -119,6 +130,19 @@ namespace MedicalWorm
                         NursingCertification.HWNC
                     },
                     FloorsWorked = new[] { 1, 2, 5}
+                },
+                new Nurse
+                {
+                    EmployeeId = 8334,
+                    Name = "Chris McDonald",
+                    HoursWorked = 8,
+                    VacationDays = 4,
+                    IsRegisteredNurse = true,
+                    Certifications = new List<NursingCertification>
+                    {
+                        NursingCertification.CHPLN
+                    },
+                    FloorsWorked = new[] { 1, 2, 5 }
                 }
             };
         }
@@ -146,6 +170,13 @@ namespace MedicalWorm
                     ExternalAgencyId = "137",
                     ExternalAgencyName = "StaffMark",
                     Name = "Derek",
+                    HoursWorked = 40
+                },
+                new Janitor
+                {
+                    ExternalAgencyId = "138",
+                    ExternalAgencyName = "StaffMark",
+                    Name = "Chris",
                     HoursWorked = 40
                 }
             };

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using MedicalWorm.Core.Interfaces;
 
 namespace MedicalWorm.Core.Models
@@ -15,17 +16,14 @@ namespace MedicalWorm.Core.Models
 
         public string PrintBadge()
         {
-            //TODO: Print a temporary badge with name and agency name
-
-            throw new NotImplementedException();
+            return $"{Name}, {ExternalAgencyName}, {ExternalAgencyId}";
         }
 
         public decimal CalculatePay()
         {
-            //TODO: Calculate pay using minimum wage
-            //TODO: Store current minimum wage in app.config, pull value from there
-
-            throw new NotImplementedException();
+            var minWage = ConfigurationSettings.AppSettings["MinimumWage"];
+            
+            return HoursWorked * Convert.ToDecimal(minWage);
         }
     }
 }

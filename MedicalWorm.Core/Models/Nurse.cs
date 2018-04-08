@@ -6,7 +6,7 @@ namespace MedicalWorm.Core.Models
 {
     public class Nurse : EmployeeBase, IEmployee
     {
-        //TODO: Add constant for pay rate used in CalculatePay()
+        private const decimal _payRate = 150;
 
         public bool IsRegisteredNurse { get; set; }
         public List<NursingCertification> Certifications { get; set; }
@@ -14,18 +14,34 @@ namespace MedicalWorm.Core.Models
 
         public string PrintBadge()
         {
-            //TODO: If IsRegisteredNurse, prepend RN- to every Certification
-            //TODO: Include comma seperated list of floors in badge
-            var commaSeperated = string.Join(", ", Certifications);
+            if (IsRegisteredNurse)
+            {
+                var rNCert = "RN " + Certifications;
+                var commaSeparatedFloors = string.Join(", ", FloorsWorked);
+                var commaSeperatedCerts = string.Join(", ", rNCert);
 
-            return $"{Name}, {commaSeperated} ({EmployeeId})";
+                return $"{Name}, {commaSeperatedCerts}, Floors: {commaSeparatedFloors}, ({EmployeeId})";
+            }
+            else
+            {
+                var commaSeparatedFloors = string.Join(", ", FloorsWorked);
+                var commaSeperatedCerts = string.Join(", ", Certifications);
+
+                return $"{Name}, {commaSeperatedCerts}, Floors: {commaSeparatedFloors}, ({EmployeeId})";
+            }
         }
 
         public decimal CalculatePay()
         {
-            //TODO: Nurse should be paid "time and a half" for anything over 40hrs
-
-            return HoursWorked * 150;
+            decimal overTimePay = _payRate / 2;
+            decimal overtimeHours = HoursWorked - 40;
+            if (HoursWorked > 40)
+            {
+                decimal overPay = overTimePay * overtimeHours;
+                decimal regPay = HoursWorked * _payRate;
+                return overPay + _payRate;
+            }
+            return HoursWorked * _payRate;
         }
 
         public override void TakeVacation(int numberOfDays)
