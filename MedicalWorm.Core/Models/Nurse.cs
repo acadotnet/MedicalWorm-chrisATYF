@@ -16,11 +16,11 @@ namespace MedicalWorm.Core.Models
         {
             if (IsRegisteredNurse)
             {
-                var rNCert = "RN " + Certifications;
+                var rNCert = "RN";
                 var commaSeparatedFloors = string.Join(", ", FloorsWorked);
-                var commaSeperatedCerts = string.Join(", ", rNCert);
+                var commaSeparatedCerts = string.Join(", ", Certifications);
 
-                return $"{Name}, {commaSeperatedCerts}, Floors: {commaSeparatedFloors}, ({EmployeeId})";
+                return $"{Name}, {rNCert} : {commaSeparatedCerts}, Floors: {commaSeparatedFloors}, ({EmployeeId})";
             }
             else
             {

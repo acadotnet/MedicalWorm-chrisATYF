@@ -16,6 +16,20 @@ namespace MedicalWorm
             var janitors = EmployeeFactory.GenerateJanitors();
             var newDoctor = new Doctor();
             newDoctor.PrimaryNurse = newDoctor.ReturnPrimaryNurse(nurses);
+            var certifyNurse = new Nurse
+            {
+                EmployeeId = 6278,
+                Name = "Timothy",
+                HoursWorked = 70.1M,
+                VacationDays = 6,
+                IsRegisteredNurse = true,
+                Certifications = new List<NursingCertification>
+                    {
+                        NursingCertification.ACRN,
+                        NursingCertification.COCN
+                    },
+                FloorsWorked = new[] { 2, 3, 6 }
+            };
 
             Console.WriteLine("Welcome to Medical Worm Hospital");
 
@@ -65,6 +79,8 @@ namespace MedicalWorm
 
             //.Single() / .SingleOrDefault()
             var docSinglePat = doctors.Where(n => n.EmployeeId == 111).SingleOrDefault();
+
+            Console.WriteLine(certifyNurse.PrintBadge());
             
             Console.ReadLine();
         }
