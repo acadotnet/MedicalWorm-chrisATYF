@@ -14,6 +14,8 @@ namespace MedicalWorm
             var doctors = EmployeeFactory.GenerateDoctors();
             var nurses = EmployeeFactory.GenerateNurses();
             var janitors = EmployeeFactory.GenerateJanitors();
+            var newDoctor = new Doctor();
+            newDoctor.PrimaryNurse = newDoctor.ReturnPrimaryNurse(nurses);
 
             Console.WriteLine("Welcome to Medical Worm Hospital");
 
