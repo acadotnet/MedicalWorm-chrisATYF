@@ -30,5 +30,12 @@ namespace MedicalWorm.Core.Enums
                 ? abbrev.ToUpper()
                 : abbrev.ToLower();
         }
+
+        public static string NursingCertificationFormatted(this NursingCertification certification, bool isRegistered)
+        {
+            return isRegistered
+                ? $"RN-{certification}"
+                : certification.ToString();
+        }
     }
 }

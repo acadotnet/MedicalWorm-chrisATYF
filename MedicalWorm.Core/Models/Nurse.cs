@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using MedicalWorm.Core.Enums;
 using MedicalWorm.Core.Interfaces;
 
@@ -14,21 +15,10 @@ namespace MedicalWorm.Core.Models
 
         public string PrintBadge()
         {
-            if (IsRegisteredNurse)
-            {
-                var rNCert = "RN";
-                var commaSeparatedFloors = string.Join(", ", FloorsWorked);
-                var commaSeparatedCerts = string.Join(", ", Certifications);
-
-                return $"{Name}, {rNCert} : {commaSeparatedCerts}, Floors: {commaSeparatedFloors}, ({EmployeeId})";
-            }
-            else
-            {
-                var commaSeparatedFloors = string.Join(", ", FloorsWorked);
-                var commaSeperatedCerts = string.Join(", ", Certifications);
-
-                return $"{Name}, {commaSeperatedCerts}, Floors: {commaSeparatedFloors}, ({EmployeeId})";
-            }
+            var certsFormatted = string.Join(", ", Certifications.Select(c => c.NursingCertificationFormatted(IsRegisteredNurse)).ToList());
+            var commaSeparatedFloors = string.Join(", ", FloorsWorked);
+            
+            return $"{Name}, {certsFormatted}, Floors: {commaSeparatedFloors}, ({EmployeeId})";
         }
 
         public decimal CalculatePay()

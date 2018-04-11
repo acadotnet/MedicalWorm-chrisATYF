@@ -6,6 +6,8 @@ namespace MedicalWorm.Core.Models
 {
     public class Janitor : IEmployee
     {
+        private static decimal _minWage = Convert.ToDecimal(ConfigurationManager.AppSettings["MinimumWage"]);
+
         public string ExternalAgencyId { get; set; }
 
         public string ExternalAgencyName { get; set; }
@@ -21,9 +23,7 @@ namespace MedicalWorm.Core.Models
 
         public decimal CalculatePay()
         {
-            var minWage = ConfigurationSettings.AppSettings["MinimumWage"];
-            
-            return HoursWorked * Convert.ToDecimal(minWage);
+            return HoursWorked * _minWage;
         }
     }
 }

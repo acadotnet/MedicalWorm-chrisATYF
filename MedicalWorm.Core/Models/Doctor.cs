@@ -15,16 +15,12 @@ namespace MedicalWorm.Core.Models
 
         public List<Nurse> Nurses { get; set; }
 
-        public Nurse PrimaryNurse { get; set; }
-        
+        //                        => boolToEval ? trueCase : falseCase;
+        public Nurse PrimaryNurse => Nurses.Any(n => n.IsRegisteredNurse)
+            ? Nurses.Where(n => n.IsRegisteredNurse).FirstOrDefault()
+            : Nurses.OrderBy(n => n.HoursWorked).FirstOrDefault();
+
         public Guid PrescriptionAuthorizationId { get; set; }
-
-        public Nurse ReturnPrimaryNurse(IEnumerable<Nurse> nurses)
-        {
-            var topNurse = nurses.Where(n => n.IsRegisteredNurse).FirstOrDefault();
-
-            return topNurse;
-        }
 
         public string PrintBadge()
         {
